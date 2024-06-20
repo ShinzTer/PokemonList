@@ -1,7 +1,7 @@
-package repository
+package by.aithusa.pokemonlist.repository
 
 import by.aithusa.pokemonlist.R
-import model.Pokemon
+import by.aithusa.pokemonlist.model.Pokemon
 
 object PokemonRepository {
     private val pokemons: HashMap<Int, Pokemon> = HashMap(listOf(

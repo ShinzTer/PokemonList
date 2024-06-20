@@ -1,4 +1,4 @@
-package model
+package by.aithusa.pokemonlist.model
 
 import androidx.annotation.DrawableRes
 

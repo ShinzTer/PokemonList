@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import repository.PokemonRepository
+import by.aithusa.pokemonlist.repository.PokemonRepository
 
 class MainActivity : AppCompatActivity() {
 
