@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PokemonList</string>
+    <string name="main_title">Favourite pokemons</string>
+    <string name="pokemon_image">Pokemon image</string>
+    <string name="pokemon_list">Pokemon list</string>
+    <string name="flareon">Flareon</string>
+    <string name="jolteon">Jolteon</string>
+    <string name="snorlax">Snorlax</string>
+    <string name="tyranitar">Tyranitar</string>
+    <string name="btn_back_to_pockemon_list">Back to pockemon list</string>
 </resources>
