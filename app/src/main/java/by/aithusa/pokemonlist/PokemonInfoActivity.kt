@@ -28,7 +28,6 @@ class PokemonInfoActivity : AppCompatActivity() {
         pokemon?.let {
             pokemonImage.setImageResource(it.imageRes)
             pokemonName.text = it.name
-            pokemonType.text = it.type.joinToString(", ")
             "${it.weight}kg".also { pokemonWeight.text = it }
             "${it.height}cm".also { pokemonHeight.text = it }
             "Type:\n${it.type.joinToString(", ")}".also {pokemonType.text = it}

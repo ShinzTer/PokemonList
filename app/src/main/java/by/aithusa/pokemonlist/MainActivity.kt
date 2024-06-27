@@ -2,6 +2,7 @@ package by.aithusa.pokemonlist
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.aithusa.pokemonlist.repository.PokemonRepository
@@ -19,5 +20,8 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PokemonAdapter(pokemonList)
         recyclerView.adapter = adapter
+
+        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(dividerItemDecoration)
     }
 }
