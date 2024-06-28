@@ -18,8 +18,10 @@ class MainActivity : AppCompatActivity() {
 
         val pokemonList = PokemonRepository.getPokemons().values.toList()
 
-        val adapter = PokemonAdapter(pokemonList)
+        val adapter = PokemonAdapter()
         recyclerView.adapter = adapter
+
+        adapter.updatePokemonList(pokemonList)
 
         val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(dividerItemDecoration)
