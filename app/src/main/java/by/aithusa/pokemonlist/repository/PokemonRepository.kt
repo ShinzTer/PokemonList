@@ -35,7 +35,7 @@ object PokemonRepository {
             imageRes = R.drawable.tyranitar,
             weight = 202,
             height = 200,
-            type = listOf("Rock","Dark")
+            type = listOf("Rock", "Dark")
         )
     ).associateBy { it.id })
 

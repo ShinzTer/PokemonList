@@ -18,22 +18,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingTop="8dp"
             android:text="@string/pokemon_list"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:paddingTop="8dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/title_main"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:listitem="@layout/pokemon_card_view"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_main"
+            tools:listitem="@layout/pokemon_card_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

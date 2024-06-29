@@ -1,11 +1,10 @@
 package by.aithusa.pokemonlist
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import by.aithusa.pokemonlist.model.Pokemon
 import by.aithusa.pokemonlist.repository.PokemonRepository
 
@@ -30,7 +29,7 @@ class PokemonInfoActivity : AppCompatActivity() {
             pokemonName.text = it.name
             "${it.weight}kg".also { pokemonWeight.text = it }
             "${it.height}cm".also { pokemonHeight.text = it }
-            "Type:\n${it.type.joinToString(", ")}".also {pokemonType.text = it}
+            "Type:\n${it.type.joinToString(", ")}".also { pokemonType.text = it }
         } ?: run {
             pokemonImage.setImageResource(R.drawable.ic_launcher_foreground)
             pokemonName.text = "Unknown"

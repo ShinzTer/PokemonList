@@ -15,7 +15,8 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() 
     private var pokemonList = emptyList<Pokemon>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.pokemon_card_view, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.pokemon_card_view, parent, false)
         return PokemonViewHolder(itemView)
     }
 
