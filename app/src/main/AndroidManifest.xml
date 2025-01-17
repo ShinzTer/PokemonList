@@ -17,6 +17,9 @@
             android:name=".PokemonInfoActivity"
             android:exported="false" />
         <activity
+            android:name=".PokemonTeamActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

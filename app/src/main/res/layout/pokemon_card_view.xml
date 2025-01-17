@@ -23,7 +23,8 @@
             android:id="@+id/pokemon_image"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/pokemon"
             tools:src="@drawable/flareon" />
 
         <TextView
@@ -31,8 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"

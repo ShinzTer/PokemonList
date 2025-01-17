@@ -19,7 +19,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 
     companion object {
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile
+        private var instance: AppDatabase? = null
 
         fun getInstance(context: android.content.Context): AppDatabase {
             return instance ?: synchronized(this) {

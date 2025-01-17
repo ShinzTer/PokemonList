@@ -1,5 +1,6 @@
 package by.aithusa.pokemonlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,12 +24,37 @@ class MainActivity : AppCompatActivity() {
 
         adapter = PokemonAdapter { pokemon ->
             val intent = PokemonInfoActivity.newIntent(this, pokemon.name)
+            intent.putExtra("pokemon", pokemon)
             startActivity(intent)
+        }
+
+        binding.buttonToTeam.setOnClickListener {
+            val intent = Intent(this, PokemonTeamActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.buttonRefresh?.setOnClickListener {
+            refreshPokemonList()
         }
 
         binding.recyclerView.adapter = adapter
 
         loadPokemon()
+    }
+
+    private fun refreshPokemonList() {
+        lifecycleScope.launch {
+            try {
+                // Очистка данных
+                repository.clearData()
+                // Здесь вы можете заново загрузить данные из API или другой источник
+                Toast.makeText(this@MainActivity, "Список обновлён!", Toast.LENGTH_SHORT).show()
+                // Обновление списка на экране
+                loadPokemon()
+            } catch (e: Exception) {
+                Toast.makeText(this@MainActivity, "Ошибка обновления списка", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun loadPokemon() {
@@ -37,7 +63,8 @@ class MainActivity : AppCompatActivity() {
                 val pokemonList = repository.getPokemonList()
                 adapter.submitList(pokemonList)
             } catch (e: Exception) {
-                Toast.makeText(this@MainActivity, "Failed to load Pokemon", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Failed to load Pokemon", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

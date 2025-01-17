@@ -32,7 +32,7 @@ class PokemonRepository(context: Context) {
                 val apiData = api.getPokemonList().results.map { result ->
                     val details = api.getPokemon(result.name)
                     PokemonEntity(
-                        name = details.name,
+                        name = details.name.replaceFirstChar { it.uppercaseChar() },
                         imageUrl = details.sprites.front_default ?: "",
                         types = details.types.joinToString(",") { it.type.name },
                         abilities = details.abilities.joinToString(",") { it.ability.name }
