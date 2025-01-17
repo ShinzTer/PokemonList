@@ -1,44 +1,52 @@
 package by.aithusa.pokemonlist.repository
 
-import by.aithusa.pokemonlist.R
-import by.aithusa.pokemonlist.model.Pokemon
+import android.content.Context
+import by.aithusa.pokemonlist.database.AppDatabase
+import by.aithusa.pokemonlist.database.PokemonEntity
+import by.aithusa.pokemonlist.network.PokeApiService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-object PokemonRepository {
-    private val pokemons: HashMap<Int, Pokemon> = HashMap(listOf(
-        Pokemon(
-            id = 1,
-            name = "Flareon",
-            imageRes = R.drawable.flareon,
-            weight = 25,
-            height = 90,
-            type = listOf("Fire")
-        ),
-        Pokemon(
-            id = 2,
-            name = "Jolteon",
-            imageRes = R.drawable.jolteon,
-            weight = 25,
-            height = 80,
-            type = listOf("Electric")
-        ),
-        Pokemon(
-            id = 3,
-            name = "Snorlax",
-            imageRes = R.drawable.snorlax,
-            weight = 460,
-            height = 210,
-            type = listOf("Normal")
-        ),
-        Pokemon(
-            id = 4,
-            name = "Tyranitar",
-            imageRes = R.drawable.tyranitar,
-            weight = 202,
-            height = 200,
-            type = listOf("Rock", "Dark")
-        )
-    ).associateBy { it.id })
+class PokemonRepository(context: Context) {
 
-    fun getPokemons(): HashMap<Int, Pokemon> = pokemons
-    fun getPokemonById(id: Int): Pokemon? = pokemons[id]
+    private val api: PokeApiService
+    private val pokemonDao = AppDatabase.getInstance(context).pokemonDao()
+
+    init {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://pokeapi.co/api/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        api = retrofit.create(PokeApiService::class.java)
+    }
+
+    suspend fun getPokemonList(): List<PokemonEntity> {
+        return withContext(Dispatchers.IO) {
+            val localData = pokemonDao.getAll()
+            if (localData.isNotEmpty()) {
+                localData
+            } else {
+                val apiData = api.getPokemonList().results.map { result ->
+                    val details = api.getPokemon(result.name)
+                    PokemonEntity(
+                        name = details.name,
+                        imageUrl = details.sprites.front_default ?: "",
+                        types = details.types.joinToString(",") { it.type.name },
+                        abilities = details.abilities.joinToString(",") { it.ability.name }
+                    )
+                }
+                pokemonDao.insertAll(apiData)
+                apiData
+            }
+        }
+    }
+
+    suspend fun clearData() {
+        withContext(Dispatchers.IO) {
+            pokemonDao.clear()
+        }
+    }
 }

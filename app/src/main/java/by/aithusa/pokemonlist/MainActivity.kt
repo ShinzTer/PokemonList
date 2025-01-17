@@ -1,33 +1,44 @@
 package by.aithusa.pokemonlist
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import by.aithusa.pokemonlist.databinding.ActivityMainBinding
 import by.aithusa.pokemonlist.repository.PokemonRepository
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var repository: PokemonRepository
+    private lateinit var adapter: PokemonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val recyclerView: RecyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        repository = PokemonRepository(this)
 
-        val pokemonList = PokemonRepository.getPokemons().values.toList()
+        adapter = PokemonAdapter { pokemon ->
+            val intent = PokemonInfoActivity.newIntent(this, pokemon.name)
+            startActivity(intent)
+        }
 
-        val adapter = PokemonAdapter()
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
-        adapter.updatePokemonList(pokemonList)
+        loadPokemon()
+    }
 
-        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        recyclerView.addItemDecoration(dividerItemDecoration)
+    private fun loadPokemon() {
+        lifecycleScope.launch {
+            try {
+                val pokemonList = repository.getPokemonList()
+                adapter.submitList(pokemonList)
+            } catch (e: Exception) {
+                Toast.makeText(this@MainActivity, "Failed to load Pokemon", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

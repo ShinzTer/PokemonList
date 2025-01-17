@@ -28,68 +28,40 @@
 
     <ImageView
         android:id="@+id/pokemon_image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pokemon_name"
         tools:src="@drawable/flareon" />
 
-    <ImageView
-        android:id="@+id/weight_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/weight"
-        app:layout_constraintBottom_toTopOf="@id/height_image"
-        app:layout_constraintEnd_toEndOf="@id/pokemon_image"
-        app:layout_constraintStart_toStartOf="@id/pokemon_image"
-        app:layout_constraintTop_toBottomOf="@id/pokemon_image" />
-
     <TextView
-        android:id="@+id/pokemon_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/weight_image"
-        app:layout_constraintEnd_toEndOf="@+id/weight_image"
-        app:layout_constraintStart_toStartOf="@+id/weight_image"
-        app:layout_constraintTop_toTopOf="@+id/weight_image"
-        tools:text="25kg" />
-
-    <ImageView
-        android:id="@+id/height_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="100dp"
-        android:src="@drawable/height"
-        app:layout_constraintBottom_toTopOf="@id/pokemon_type"
-        app:layout_constraintEnd_toEndOf="@id/pokemon_image"
-        app:layout_constraintStart_toStartOf="@id/pokemon_image"
-        app:layout_constraintTop_toBottomOf="@id/weight_image" />
-
-    <TextView
-        android:id="@+id/pokemon_height"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/height_image"
-        app:layout_constraintStart_toEndOf="@id/height_image"
-        app:layout_constraintTop_toTopOf="@id/height_image"
-        tools:text="90cm" />
-
-    <TextView
-        android:id="@+id/pokemon_type"
-        android:layout_width="wrap_content"
+        android:id="@+id/pokemon_types"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/pokemon_abilities"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pokemon_image"
+        tools:text="Type:\nPsychic, Fighting" />
+
+    <TextView
+        android:id="@+id/pokemon_abilities"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:textAlignment="center"
@@ -99,7 +71,7 @@
         app:layout_constraintBottom_toTopOf="@id/button_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/height_image"
+        app:layout_constraintTop_toBottomOf="@id/pokemon_types"
         tools:text="Type:\nPsychic, Fighting" />
 
     <Button

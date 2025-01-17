@@ -1,22 +1,14 @@
 package by.aithusa.pokemonlist
 
 import androidx.recyclerview.widget.DiffUtil
-import by.aithusa.pokemonlist.model.Pokemon
+import by.aithusa.pokemonlist.database.PokemonEntity
 
-class PokemonDiffCallback(
-    private val oldList: List<Pokemon>,
-    private val newList: List<Pokemon>
-) : DiffUtil.Callback() {
-
-    override fun getOldListSize(): Int = oldList.size
-
-    override fun getNewListSize(): Int = newList.size
-
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].id == newList[newItemPosition].id
+class PokemonDiffCallback : DiffUtil.ItemCallback<PokemonEntity>() {
+    override fun areItemsTheSame(oldItem: PokemonEntity, newItem: PokemonEntity): Boolean {
+        return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition] == newList[newItemPosition]
+    override fun areContentsTheSame(oldItem: PokemonEntity, newItem: PokemonEntity): Boolean {
+        return oldItem == newItem
     }
 }
